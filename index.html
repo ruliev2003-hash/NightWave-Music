@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>NightWave</title>
+
+<style>
+body {
+    background: #0f0f0f;
+    color: white;
+    font-family: Arial;
+    padding: 20px;
+}
+
+.card {
+    background: #1c1c1c;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+button {
+    background: #6c5ce7;
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>🎧 NightWave</h2>
+
+<div class="card">
+    <b>Travis Scott - FE!N</b><br>
+    <button onclick="play()">▶️ Play</button>
+</div>
+
+<audio id="player" controls style="width:100%; margin-top:20px;"></audio>
+
+<script>
+function play() {
+    const audio = document.getElementById('player');
+    audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+    audio.play();
+}
+</script>
+
+</body>
+</html>
