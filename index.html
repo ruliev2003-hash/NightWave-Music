@@ -238,10 +238,16 @@ body {
 </div>
 
 <div class="search-box">
-    <input type="text" placeholder="Поиск музыки...">
+    <input
+    type="text"
+    id="searchInput"
+    placeholder="Поиск музыки..."
+    onkeypress="handleSearch(event)"
+>
 </div>
 
 <div class="section-title">🔥 Популярное</div>
+    <div id="results"></div>
 
 <div class="track-card">
     <div class="track-left">
@@ -323,6 +329,88 @@ function toggleAudio() {
     }
 }
 </script>
+    async function searchMusic(query) {
+
+    const results = document.getElementById('results');
+
+    results.innerHTML = '🔍 Поиск...';
+
+    try {
+
+        const response = await fetch(
+            `https://deezerdevs-deezer.p.rapidapi.com/search?q=${query}`,
+            {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': 'b3f5e35182msh47204f2accc30f4p121bffjsn88834bfff50a',
+                    'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
+                }
+            }
+        );
+
+        const data = await response.json();
+
+        results.innerHTML = '';
+
+        data.data.slice(0, 5).forEach(track => {
+
+            results.innerHTML += `
+                <div class="track-card">
+
+                    <div class="track-left">
+
+                        <div
+                            class="cover"
+                            style="background-image:url('${track.album.cover_medium}')"
+                        ></div>
+
+                        <div class="track-info">
+                            <h3>${track.title}</h3>
+                            <p>${track.artist.name}</p>
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="play-btn"
+                        onclick="playTrack('${track.preview}', '${track.title}', '${track.artist.name}')"
+                    >
+                        ▶
+                    </button>
+
+                </div>
+            `;
+        });
+
+    } catch (error) {
+
+        results.innerHTML = '❌ Ошибка поиска';
+
+        console.error(error);
+    }
+}
+
+function handleSearch(event) {
+
+    if (event.key === 'Enter') {
+
+        const query = document.getElementById('searchInput').value;
+
+        if (query.trim() !== '') {
+            searchMusic(query);
+        }
+    }
+}
+
+function playTrack(url, title, artist) {
+
+    document.getElementById('track-name').innerText = title;
+    document.getElementById('artist-name').innerText = artist;
+
+    audio.src = url;
+
+    audio.play();
+}
 <div class="bottom-nav">
     <button class="nav-btn active">🏠</button>
     <button class="nav-btn">🔍</button>
