@@ -1,53 +1,286 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NightWave</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    background: #0f0f0f;
+    background: linear-gradient(to bottom, #0f0f0f, #090909);
     color: white;
-    font-family: Arial;
+    font-family: 'Inter', sans-serif;
     padding: 20px;
 }
 
-.card {
-    background: #1c1c1c;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 10px;
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
-button {
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.profile {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
     background: #6c5ce7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.search-box {
+    background: #1b1b1b;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 25px;
+}
+
+.search-box input {
+    width: 100%;
+    background: transparent;
     border: none;
-    padding: 10px;
+    outline: none;
     color: white;
-    border-radius: 8px;
-    margin-top: 10px;
+    font-size: 15px;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.track-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    padding: 14px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.2s;
+}
+
+.track-card:hover {
+    transform: scale(1.02);
+}
+
+.track-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.cover {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    background-size: cover;
+    background-position: center;
+}
+
+.track-info h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.track-info p {
+    color: #aaaaaa;
+    font-size: 13px;
+}
+
+.play-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: #6c5ce7;
+    color: white;
+    font-size: 18px;
     cursor: pointer;
 }
+
+.player {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(25,25,25,0.95);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 15px;
+    backdrop-filter: blur(12px);
+}
+
+.player-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.player-track {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.player-artist {
+    color: #aaaaaa;
+    font-size: 13px;
+}
+
+.progress {
+    width: 100%;
+    height: 5px;
+    background: #333;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.progress-fill {
+    width: 35%;
+    height: 100%;
+    background: #6c5ce7;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.control-btn {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: none;
+    background: #2a2a2a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.main-play {
+    background: #6c5ce7;
+}
+
+.bottom-space {
+    height: 170px;
+}
 </style>
-
 </head>
-
 <body>
 
-<h2>🎧 NightWave</h2>
-
-<div class="card">
-    <b>Travis Scott - FE!N</b><br>
-    <button onclick="play()">▶️ Play</button>
+<div class="header">
+    <div class="logo">🎧 NightWave</div>
+    <div class="profile">N</div>
 </div>
 
-<audio id="player" controls style="width:100%; margin-top:20px;"></audio>
+<div class="search-box">
+    <input type="text" placeholder="Поиск музыки...">
+</div>
+
+<div class="section-title">🔥 Популярное</div>
+
+<div class="track-card">
+    <div class="track-left">
+        <div class="cover" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=500');"></div>
+        <div class="track-info">
+            <h3>FE!N</h3>
+            <p>Travis Scott</p>
+        </div>
+    </div>
+
+    <button class="play-btn" onclick="playMusic('FE!N','Travis Scott')">▶</button>
+</div>
+
+<div class="track-card">
+    <div class="track-left">
+        <div class="cover" style="background-image:url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=500');"></div>
+        <div class="track-info">
+            <h3>After Hours</h3>
+            <p>The Weeknd</p>
+        </div>
+    </div>
+
+    <button class="play-btn" onclick="playMusic('After Hours','The Weeknd')">▶</button>
+</div>
+
+<div class="track-card">
+    <div class="track-left">
+        <div class="cover" style="background-image:url('https://images.unsplash.com/photo-1501612780327-45045538702b?q=80&w=500');"></div>
+        <div class="track-info">
+            <h3>Starboy</h3>
+            <p>The Weeknd</p>
+        </div>
+    </div>
+
+    <button class="play-btn" onclick="playMusic('Starboy','The Weeknd')">▶</button>
+</div>
+
+<div class="bottom-space"></div>
+
+<div class="player">
+
+    <div class="player-top">
+        <div>
+            <div class="player-track" id="track-name">NightWave Track</div>
+            <div class="player-artist" id="artist-name">Unknown Artist</div>
+        </div>
+    </div>
+
+    <div class="progress">
+        <div class="progress-fill"></div>
+    </div>
+
+    <div class="controls">
+        <button class="control-btn">⏮</button>
+        <button class="control-btn main-play" onclick="toggleAudio()">▶</button>
+        <button class="control-btn">⏭</button>
+    </div>
+
+</div>
+
+<audio id="audio"></audio>
 
 <script>
-function play() {
-    const audio = document.getElementById('player');
+const audio = document.getElementById('audio');
+
+function playMusic(track, artist) {
+    document.getElementById('track-name').innerText = track;
+    document.getElementById('artist-name').innerText = artist;
+
     audio.src = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
     audio.play();
+}
+
+function toggleAudio() {
+    if (audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
 }
 </script>
 
