@@ -187,7 +187,9 @@ body {
 
 .bottom-space {
     height: 170px;
-    .bottom-nav {
+}
+
+.bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -327,8 +329,6 @@ function toggleAudio() {
     } else {
         audio.pause();
     }
-}
-</script>
     async function searchMusic(query) {
 
     const results = document.getElementById('results');
@@ -411,6 +411,8 @@ function playTrack(url, title, artist) {
 
     audio.play();
 }
+
+</script>
 <div class="bottom-nav">
     <button class="nav-btn active">🏠</button>
     <button class="nav-btn">🔍</button>
