@@ -329,7 +329,7 @@ function toggleAudio() {
     } else {
         audio.pause();
     }
-    async function searchMusic(query) {
+async function searchMusic(query) {
 
     const results = document.getElementById('results');
 
@@ -338,21 +338,14 @@ function toggleAudio() {
     try {
 
         const response = await fetch(
-            `https://deezerdevs-deezer.p.rapidapi.com/search?q=${query}`,
-            {
-                method: 'GET',
-                headers: {
-                    'X-RapidAPI-Key': 'b3f5e35182msh47204f2accc30f4p121bffjsn88834bfff50a',
-                    'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
-                }
-            }
+            `https://striveschool-api.herokuapp.com/api/deezer/search?q=${query}`
         );
 
         const data = await response.json();
 
         results.innerHTML = '';
 
-        data.data.slice(0, 5).forEach(track => {
+        data.data.slice(0, 8).forEach(track => {
 
             results.innerHTML += `
                 <div class="track-card">
