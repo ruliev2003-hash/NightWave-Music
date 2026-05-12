@@ -187,6 +187,46 @@ body {
 
 .bottom-space {
     height: 170px;
+    .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 75px;
+    background: rgba(10,10,10,0.96);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 999;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nav-btn.active {
+    color: #8b7dff;
+    transform: scale(1.15);
+}
+
+.nav-btn:hover {
+    color: white;
+}
+
+.track-card {
+    box-shadow: 0 0 25px rgba(108,92,231,0.08);
+}
+
+.play-btn {
+    box-shadow: 0 0 20px rgba(108,92,231,0.35);
+}
 }
 </style>
 </head>
@@ -283,6 +323,11 @@ function toggleAudio() {
     }
 }
 </script>
-
+<div class="bottom-nav">
+    <button class="nav-btn active">🏠</button>
+    <button class="nav-btn">🔍</button>
+    <button class="nav-btn">❤️</button>
+    <button class="nav-btn">👤</button>
+</div>
 </body>
 </html>
